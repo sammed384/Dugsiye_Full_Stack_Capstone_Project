@@ -16,6 +16,7 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./utils/swagger.js";
 import { limiter } from "./middlewares/rateLimiter.js";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
@@ -50,6 +51,20 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.get("/api/health", (req, res) => {
   res.send("Server is running");
 });
+
+// Server fronted in Production
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  // Serve the frontend app
+
+  app.get(/.*/, (req, res) => {
+    res.send(path.join(__dirname, "..", "frontend", "dist", "index.html"));
+  });
+}
 
 // ✅ 3. 404 Handler – Only runs if no route matched
 app.use(notFound);
