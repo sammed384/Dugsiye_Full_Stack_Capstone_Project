@@ -1,4 +1,6 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
@@ -62,7 +64,7 @@ if (process.env.NODE_ENV === "production") {
   // Serve the frontend app
 
   app.get(/.*/, (req, res) => {
-    res.send(path.join(__dirname, "..", "frontend", "dist", "index.html"));
+    res.sendFile(path.join(__dirname, "..", "frontend", "dist", "index.html"));
   });
 }
 
