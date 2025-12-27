@@ -18,7 +18,7 @@ const options = {
           process.env.NODE_ENV == "development"
             ? "http://localhost:3000"
             : process.env.SERVER_URL ||
-              "https://dugsiye-nodejs-api.onrender.com",
+              "https://dugsiye-full-stack-capstone-project.onrender.com",
       },
     ],
     components: {
