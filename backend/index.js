@@ -18,7 +18,6 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./utils/swagger.js";
 import { limiter } from "./middlewares/rateLimiter.js";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 const app = express();
